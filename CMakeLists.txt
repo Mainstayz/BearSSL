@@ -9,6 +9,7 @@ target_include_directories(bearssl PUBLIC inc)
 add_library(BearSSL::BearSSL ALIAS bearssl)
 
 add_subdirectory(src)
-add_subdirectory(samples)
-add_subdirectory(tools)
-add_subdirectory(test)
+
+#add_subdirectory(samples)
+#add_subdirectory(tools)
+#add_subdirectory(test)
