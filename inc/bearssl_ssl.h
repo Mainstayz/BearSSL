@@ -2009,7 +2009,7 @@ br_ssl_engine_get_ecdhe_curve(br_ssl_engine_context *cc)
  * \param cc   SSL engine context.
  * \return  the current engine state.
  */
-unsigned br_ssl_engine_current_state(const br_ssl_engine_context *cc);
+BR_SSL_EXPORT unsigned br_ssl_engine_current_state(const br_ssl_engine_context *cc);
 
 /** \brief SSL engine state: closed or failed. */
 #define BR_SSL_CLOSED    0x0001
