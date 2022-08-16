@@ -39,6 +39,12 @@
 extern "C" {
 #endif
 
+#ifdef _MSC_VER
+#define BR_SSL_EXPORT __declspec(dllexport)
+#else
+#define BR_SSL_EXPORT
+#endif
+
 /** \file bearssl_ssl.h
  *
  * # SSL
@@ -237,7 +243,7 @@ extern "C" {
  * MAC, and keeping track of the record sequence number.
  */
 typedef struct br_sslrec_in_class_ br_sslrec_in_class;
-struct br_sslrec_in_class_ {
+struct BR_SSL_EXPORT br_sslrec_in_class_ {
 	/**
 	 * \brief Context size (in bytes).
 	 */
@@ -291,7 +297,7 @@ struct br_sslrec_in_class_ {
  * and keeping track of the record sequence number.
  */
 typedef struct br_sslrec_out_class_ br_sslrec_out_class;
-struct br_sslrec_out_class_ {
+struct BR_SSL_EXPORT br_sslrec_out_class_ {
 	/**
 	 * \brief Context size (in bytes).
 	 */
@@ -365,7 +371,7 @@ extern const br_sslrec_out_class br_sslrec_out_clear_vtable;
  * IV is `NULL`, then a per-record IV will be used (TLS 1.1+).
  */
 typedef struct br_sslrec_in_cbc_class_ br_sslrec_in_cbc_class;
-struct br_sslrec_in_cbc_class_ {
+struct BR_SSL_EXPORT br_sslrec_in_cbc_class_ {
 	/**
 	 * \brief Superclass, as first vtable field.
 	 */
@@ -404,7 +410,7 @@ struct br_sslrec_in_cbc_class_ {
  * IV is `NULL`, then a per-record IV will be used (TLS 1.1+).
  */
 typedef struct br_sslrec_out_cbc_class_ br_sslrec_out_cbc_class;
-struct br_sslrec_out_cbc_class_ {
+struct BR_SSL_EXPORT br_sslrec_out_cbc_class_ {
 	/**
 	 * \brief Superclass, as first vtable field.
 	 */
@@ -502,7 +508,7 @@ extern const br_sslrec_out_cbc_class br_sslrec_out_cbc_vtable;
  * GHASH implementation, and 4-byte IV.
  */
 typedef struct br_sslrec_in_gcm_class_ br_sslrec_in_gcm_class;
-struct br_sslrec_in_gcm_class_ {
+struct BR_SSL_EXPORT br_sslrec_in_gcm_class_ {
 	/**
 	 * \brief Superclass, as first vtable field.
 	 */
@@ -536,7 +542,7 @@ struct br_sslrec_in_gcm_class_ {
  * GHASH implementation, and 4-byte IV.
  */
 typedef struct br_sslrec_out_gcm_class_ br_sslrec_out_gcm_class;
-struct br_sslrec_out_gcm_class_ {
+struct BR_SSL_EXPORT br_sslrec_out_gcm_class_ {
 	/**
 	 * \brief Superclass, as first vtable field.
 	 */
@@ -609,7 +615,7 @@ extern const br_sslrec_out_gcm_class br_sslrec_out_gcm_vtable;
  * Poly1305 implementation, key, and 12-byte IV.
  */
 typedef struct br_sslrec_in_chapol_class_ br_sslrec_in_chapol_class;
-struct br_sslrec_in_chapol_class_ {
+struct BR_SSL_EXPORT br_sslrec_in_chapol_class_ {
 	/**
 	 * \brief Superclass, as first vtable field.
 	 */
@@ -641,7 +647,7 @@ struct br_sslrec_in_chapol_class_ {
  * Poly1305 implementation, key, and 12-byte IV.
  */
 typedef struct br_sslrec_out_chapol_class_ br_sslrec_out_chapol_class;
-struct br_sslrec_out_chapol_class_ {
+struct BR_SSL_EXPORT br_sslrec_out_chapol_class_ {
 	/**
 	 * \brief Superclass, as first vtable field.
 	 */
@@ -709,7 +715,7 @@ extern const br_sslrec_out_chapol_class br_sslrec_out_chapol_vtable;
  * and 4-byte IV.
  */
 typedef struct br_sslrec_in_ccm_class_ br_sslrec_in_ccm_class;
-struct br_sslrec_in_ccm_class_ {
+struct BR_SSL_EXPORT br_sslrec_in_ccm_class_ {
 	/**
 	 * \brief Superclass, as first vtable field.
 	 */
@@ -742,7 +748,7 @@ struct br_sslrec_in_ccm_class_ {
  * and 4-byte IV.
  */
 typedef struct br_sslrec_out_ccm_class_ br_sslrec_out_ccm_class;
-struct br_sslrec_out_ccm_class_ {
+struct BR_SSL_EXPORT br_sslrec_out_ccm_class_ {
 	/**
 	 * \brief Superclass, as first vtable field.
 	 */
@@ -1273,7 +1279,7 @@ br_ssl_engine_set_versions(br_ssl_engine_context *cc,
  * \param suites       cipher suites.
  * \param suites_num   number of cipher suites.
  */
-void br_ssl_engine_set_suites(br_ssl_engine_context *cc,
+BR_SSL_EXPORT void br_ssl_engine_set_suites(br_ssl_engine_context *cc,
 	const uint16_t *suites, size_t suites_num);
 
 /**
@@ -1455,7 +1461,7 @@ br_ssl_engine_set_aes_cbc(br_ssl_engine_context *cc,
  *
  * \param cc   SSL engine context.
  */
-void br_ssl_engine_set_default_aes_cbc(br_ssl_engine_context *cc);
+BR_SSL_EXPORT void br_ssl_engine_set_default_aes_cbc(br_ssl_engine_context *cc);
 
 /**
  * \brief Set the AES/CTR implementation.
@@ -1480,7 +1486,7 @@ br_ssl_engine_set_aes_ctr(br_ssl_engine_context *cc,
  *
  * \param cc   SSL engine context.
  */
-void br_ssl_engine_set_default_aes_gcm(br_ssl_engine_context *cc);
+BR_SSL_EXPORT void br_ssl_engine_set_default_aes_gcm(br_ssl_engine_context *cc);
 
 /**
  * \brief Set the DES/CBC implementations.
@@ -1508,7 +1514,7 @@ br_ssl_engine_set_des_cbc(br_ssl_engine_context *cc,
  *
  * \param cc   SSL engine context.
  */
-void br_ssl_engine_set_default_des_cbc(br_ssl_engine_context *cc);
+BR_SSL_EXPORT void br_ssl_engine_set_default_des_cbc(br_ssl_engine_context *cc);
 
 /**
  * \brief Set the GHASH implementation (used in GCM mode).
@@ -1558,7 +1564,7 @@ br_ssl_engine_set_poly1305(br_ssl_engine_context *cc,
  *
  * \param cc   SSL engine context.
  */
-void br_ssl_engine_set_default_chapol(br_ssl_engine_context *cc);
+BR_SSL_EXPORT void br_ssl_engine_set_default_chapol(br_ssl_engine_context *cc);
 
 /**
  * \brief Set the AES/CTR+CBC implementation.
@@ -1583,7 +1589,7 @@ br_ssl_engine_set_aes_ctrcbc(br_ssl_engine_context *cc,
  *
  * \param cc   SSL engine context.
  */
-void br_ssl_engine_set_default_aes_ccm(br_ssl_engine_context *cc);
+BR_SSL_EXPORT void br_ssl_engine_set_default_aes_ccm(br_ssl_engine_context *cc);
 
 /**
  * \brief Set the record encryption and decryption engines for CBC + HMAC.
@@ -1674,7 +1680,7 @@ br_ssl_engine_set_ec(br_ssl_engine_context *cc, const br_ec_impl *iec)
  *
  * \param cc   SSL engine context.
  */
-void br_ssl_engine_set_default_ec(br_ssl_engine_context *cc);
+BR_SSL_EXPORT void br_ssl_engine_set_default_ec(br_ssl_engine_context *cc);
 
 /**
  * \brief Get the EC implementation configured in the provided engine.
@@ -1713,7 +1719,7 @@ br_ssl_engine_set_rsavrfy(br_ssl_engine_context *cc, br_rsa_pkcs1_vrfy irsavrfy)
  *
  * \param cc   SSL engine context.
  */
-void br_ssl_engine_set_default_rsavrfy(br_ssl_engine_context *cc);
+BR_SSL_EXPORT void br_ssl_engine_set_default_rsavrfy(br_ssl_engine_context *cc);
 
 /**
  * \brief Get the RSA implementation (signature verification) configured
@@ -1759,7 +1765,7 @@ br_ssl_engine_set_ecdsa(br_ssl_engine_context *cc, br_ecdsa_vrfy iecdsa)
  *
  * \param cc   SSL engine context.
  */
-void br_ssl_engine_set_default_ecdsa(br_ssl_engine_context *cc);
+BR_SSL_EXPORT void br_ssl_engine_set_default_ecdsa(br_ssl_engine_context *cc);
 
 /**
  * \brief Get the ECDSA implementation (signature verification) configured
@@ -1804,7 +1810,7 @@ br_ssl_engine_get_ecdsa(br_ssl_engine_context *cc)
  * \param iobuf_len   I/O buffer length (in bytes).
  * \param bidi        non-zero for full-duplex mode.
  */
-void br_ssl_engine_set_buffer(br_ssl_engine_context *cc,
+BR_SSL_EXPORT void br_ssl_engine_set_buffer(br_ssl_engine_context *cc,
 	void *iobuf, size_t iobuf_len, int bidi);
 
 /**
@@ -1827,7 +1833,7 @@ void br_ssl_engine_set_buffer(br_ssl_engine_context *cc,
  * \param obuf       output buffer.
  * \param obuf_len   output buffer length (in bytes).
  */
-void br_ssl_engine_set_buffers_bidi(br_ssl_engine_context *cc,
+BR_SSL_EXPORT void br_ssl_engine_set_buffers_bidi(br_ssl_engine_context *cc,
 	void *ibuf, size_t ibuf_len, void *obuf, size_t obuf_len);
 
 /**
@@ -1861,7 +1867,7 @@ void br_ssl_engine_set_buffers_bidi(br_ssl_engine_context *cc,
  * \param data   extra entropy to inject.
  * \param len    length of the extra data (in bytes).
  */
-void br_ssl_engine_inject_entropy(br_ssl_engine_context *cc,
+BR_SSL_EXPORT void br_ssl_engine_inject_entropy(br_ssl_engine_context *cc,
 	const void *data, size_t len);
 
 /**
@@ -2003,7 +2009,7 @@ br_ssl_engine_get_ecdhe_curve(br_ssl_engine_context *cc)
  * \param cc   SSL engine context.
  * \return  the current engine state.
  */
-unsigned br_ssl_engine_current_state(const br_ssl_engine_context *cc);
+BR_SSL_EXPORT unsigned br_ssl_engine_current_state(const br_ssl_engine_context *cc);
 
 /** \brief SSL engine state: closed or failed. */
 #define BR_SSL_CLOSED    0x0001
@@ -2097,7 +2103,7 @@ unsigned char *br_ssl_engine_sendapp_buf(
  * \param cc    SSL engine context.
  * \param len   number of bytes pushed (not zero).
  */
-void br_ssl_engine_sendapp_ack(br_ssl_engine_context *cc, size_t len);
+BR_SSL_EXPORT void br_ssl_engine_sendapp_ack(br_ssl_engine_context *cc, size_t len);
 
 /**
  * \brief Get buffer for received application data.
@@ -2126,7 +2132,7 @@ unsigned char *br_ssl_engine_recvapp_buf(
  * \param cc    SSL engine context.
  * \param len   number of bytes read (not zero).
  */
-void br_ssl_engine_recvapp_ack(br_ssl_engine_context *cc, size_t len);
+BR_SSL_EXPORT void br_ssl_engine_recvapp_ack(br_ssl_engine_context *cc, size_t len);
 
 /**
  * \brief Get buffer for record data to send.
@@ -2155,7 +2161,7 @@ unsigned char *br_ssl_engine_sendrec_buf(
  * \param cc    SSL engine context.
  * \param len   number of bytes read (not zero).
  */
-void br_ssl_engine_sendrec_ack(br_ssl_engine_context *cc, size_t len);
+BR_SSL_EXPORT void br_ssl_engine_sendrec_ack(br_ssl_engine_context *cc, size_t len);
 
 /**
  * \brief Get buffer for incoming records.
@@ -2184,7 +2190,7 @@ unsigned char *br_ssl_engine_recvrec_buf(
  * \param cc    SSL engine context.
  * \param len   number of bytes pushed (not zero).
  */
-void br_ssl_engine_recvrec_ack(br_ssl_engine_context *cc, size_t len);
+BR_SSL_EXPORT void br_ssl_engine_recvrec_ack(br_ssl_engine_context *cc, size_t len);
 
 /**
  * \brief Flush buffered application data.
@@ -2203,7 +2209,7 @@ void br_ssl_engine_recvrec_ack(br_ssl_engine_context *cc, size_t len);
  * \param cc      SSL engine context.
  * \param force   non-zero to force sending an empty record.
  */
-void br_ssl_engine_flush(br_ssl_engine_context *cc, int force);
+BR_SSL_EXPORT void br_ssl_engine_flush(br_ssl_engine_context *cc, int force);
 
 /**
  * \brief Initiate a closure.
@@ -2214,7 +2220,7 @@ void br_ssl_engine_flush(br_ssl_engine_context *cc, int force);
  *
  * \param cc   SSL engine context.
  */
-void br_ssl_engine_close(br_ssl_engine_context *cc);
+BR_SSL_EXPORT void br_ssl_engine_close(br_ssl_engine_context *cc);
 
 /**
  * \brief Initiate a renegotiation.
@@ -2232,7 +2238,7 @@ void br_ssl_engine_close(br_ssl_engine_context *cc);
  * \param cc   SSL engine context.
  * \return  1 on success, 0 on error.
  */
-int br_ssl_engine_renegotiate(br_ssl_engine_context *cc);
+BR_SSL_EXPORT int br_ssl_engine_renegotiate(br_ssl_engine_context *cc);
 
 /**
  * \brief Export key material from a connected SSL engine (RFC 5705).
@@ -2265,7 +2271,7 @@ int br_ssl_engine_renegotiate(br_ssl_engine_context *cc);
  * \param context_len   context length (in bytes).
  * \return  1 on success, 0 on error.
  */
-int br_ssl_key_export(br_ssl_engine_context *cc,
+BR_SSL_EXPORT int br_ssl_key_export(br_ssl_engine_context *cc,
 	void *dst, size_t len, const char *label,
 	const void *context, size_t context_len);
 
@@ -2351,7 +2357,7 @@ typedef struct {
  * either `do_sign()` or `do_keyx()`, depending on the algorithm choices.
  */
 typedef struct br_ssl_client_certificate_class_ br_ssl_client_certificate_class;
-struct br_ssl_client_certificate_class_ {
+struct BR_SSL_EXPORT br_ssl_client_certificate_class_ {
 	/**
 	 * \brief Context size (in bytes).
 	 */
@@ -2598,7 +2604,7 @@ typedef struct {
  * a pointer to that field. The other structure fields are opaque and
  * must not be accessed directly.
  */
-struct br_ssl_client_context_ {
+struct BR_SSL_EXPORT br_ssl_client_context_ {
 	/**
 	 * \brief The encapsulated engine context.
 	 */
@@ -2731,7 +2737,7 @@ br_ssl_client_get_server_curve(const br_ssl_client_context *cc)
  * \param trust_anchors       trust anchors to use.
  * \param trust_anchors_num   number of trust anchors.
  */
-void br_ssl_client_init_full(br_ssl_client_context *cc,
+BR_SSL_EXPORT void br_ssl_client_init_full(br_ssl_client_context *cc,
 	br_x509_minimal_context *xc,
 	const br_x509_trust_anchor *trust_anchors, size_t trust_anchors_num);
 
@@ -2744,7 +2750,7 @@ void br_ssl_client_init_full(br_ssl_client_context *cc,
  *
  * \param cc   client context to clear.
  */
-void br_ssl_client_zero(br_ssl_client_context *cc);
+BR_SSL_EXPORT void br_ssl_client_zero(br_ssl_client_context *cc);
 
 /**
  * \brief Set an externally provided client certificate handler context.
@@ -2786,7 +2792,7 @@ br_ssl_client_set_rsapub(br_ssl_client_context *cc, br_rsa_public irsapub)
  *
  * \param cc   client context.
  */
-void br_ssl_client_set_default_rsapub(br_ssl_client_context *cc);
+BR_SSL_EXPORT void br_ssl_client_set_default_rsapub(br_ssl_client_context *cc);
 
 /**
  * \brief Set the minimum ClientHello length (RFC 7685 padding).
@@ -2841,7 +2847,7 @@ br_ssl_client_set_min_clienthello_len(br_ssl_client_context *cc, uint16_t len)
  * \param resume_session   non-zero to try session resumption.
  * \return  0 on failure, 1 on success.
  */
-int br_ssl_client_reset(br_ssl_client_context *cc,
+BR_SSL_EXPORT int br_ssl_client_reset(br_ssl_client_context *cc,
 	const char *server_name, int resume_session);
 
 /**
@@ -2879,7 +2885,7 @@ br_ssl_client_forget_session(br_ssl_client_context *cc)
  * \param sk          client private key.
  * \param irsasign    RSA signature implementation (PKCS#1 v1.5).
  */
-void br_ssl_client_set_single_rsa(br_ssl_client_context *cc,
+BR_SSL_EXPORT void br_ssl_client_set_single_rsa(br_ssl_client_context *cc,
 	const br_x509_certificate *chain, size_t chain_len,
 	const br_rsa_private_key *sk, br_rsa_pkcs1_sign irsasign);
 
@@ -2920,7 +2926,7 @@ void br_ssl_client_set_single_rsa(br_ssl_client_context *cc,
  * \param iec                    EC core implementation.
  * \param iecdsa                 ECDSA signature implementation ("asn1" format).
  */
-void br_ssl_client_set_single_ec(br_ssl_client_context *cc,
+BR_SSL_EXPORT void br_ssl_client_set_single_ec(br_ssl_client_context *cc,
 	const br_x509_certificate *chain, size_t chain_len,
 	const br_ec_private_key *sk, unsigned allowed_usages,
 	unsigned cert_issuer_key_type,
@@ -3094,7 +3100,7 @@ typedef struct {
  * `do_sign()`, depending on the cipher suite.
  */
 typedef struct br_ssl_server_policy_class_ br_ssl_server_policy_class;
-struct br_ssl_server_policy_class_ {
+struct BR_SSL_EXPORT br_ssl_server_policy_class_ {
 	/**
 	 * \brief Context size (in bytes).
 	 */
@@ -3296,7 +3302,7 @@ typedef struct {
  * functions or random number generation).
  */
 typedef struct br_ssl_session_cache_class_ br_ssl_session_cache_class;
-struct br_ssl_session_cache_class_ {
+struct BR_SSL_EXPORT br_ssl_session_cache_class_ {
 	/**
 	 * \brief Context size (in bytes).
 	 */
@@ -3375,7 +3381,7 @@ typedef struct {
  * \param store       storage space for cached entries.
  * \param store_len   storage space length (in bytes).
  */
-void br_ssl_session_cache_lru_init(br_ssl_session_cache_lru *cc,
+BR_SSL_EXPORT void br_ssl_session_cache_lru_init(br_ssl_session_cache_lru *cc,
 	unsigned char *store, size_t store_len);
 
 /**
@@ -3388,7 +3394,7 @@ void br_ssl_session_cache_lru_init(br_ssl_session_cache_lru *cc,
  * \param cc   session cache context.
  * \param id   session ID to forget.
  */
-void br_ssl_session_cache_lru_forget(
+BR_SSL_EXPORT void br_ssl_session_cache_lru_forget(
 	br_ssl_session_cache_lru *cc, const unsigned char *id);
 
 /**
@@ -3399,7 +3405,7 @@ void br_ssl_session_cache_lru_forget(
  * a pointer to that field. The other structure fields are opaque and
  * must not be accessed directly.
  */
-struct br_ssl_server_context_ {
+struct BR_SSL_EXPORT br_ssl_server_context_ {
 	/**
 	 * \brief The encapsulated engine context.
 	 */
@@ -3526,7 +3532,7 @@ struct br_ssl_server_context_ {
  * \param chain_len   certificate chain length (number of certificate).
  * \param sk          RSA private key.
  */
-void br_ssl_server_init_full_rsa(br_ssl_server_context *cc,
+BR_SSL_EXPORT void br_ssl_server_init_full_rsa(br_ssl_server_context *cc,
 	const br_x509_certificate *chain, size_t chain_len,
 	const br_rsa_private_key *sk);
 
@@ -3548,7 +3554,7 @@ void br_ssl_server_init_full_rsa(br_ssl_server_context *cc,
  * \param cert_issuer_key_type   certificate issuer's key type.
  * \param sk                     EC private key.
  */
-void br_ssl_server_init_full_ec(br_ssl_server_context *cc,
+BR_SSL_EXPORT void br_ssl_server_init_full_ec(br_ssl_server_context *cc,
 	const br_x509_certificate *chain, size_t chain_len,
 	unsigned cert_issuer_key_type, const br_ec_private_key *sk);
 
@@ -3564,7 +3570,7 @@ void br_ssl_server_init_full_ec(br_ssl_server_context *cc,
  * \param chain_len   certificate chain length (number of certificate).
  * \param sk          RSA private key.
  */
-void br_ssl_server_init_minr2g(br_ssl_server_context *cc,
+BR_SSL_EXPORT void br_ssl_server_init_minr2g(br_ssl_server_context *cc,
 	const br_x509_certificate *chain, size_t chain_len,
 	const br_rsa_private_key *sk);
 
@@ -3581,7 +3587,7 @@ void br_ssl_server_init_minr2g(br_ssl_server_context *cc,
  * \param chain_len   certificate chain length (number of certificate).
  * \param sk          RSA private key.
  */
-void br_ssl_server_init_mine2g(br_ssl_server_context *cc,
+BR_SSL_EXPORT void br_ssl_server_init_mine2g(br_ssl_server_context *cc,
 	const br_x509_certificate *chain, size_t chain_len,
 	const br_rsa_private_key *sk);
 
@@ -3599,7 +3605,7 @@ void br_ssl_server_init_mine2g(br_ssl_server_context *cc,
  * \param chain_len   certificate chain length (number of certificate).
  * \param sk          EC private key.
  */
-void br_ssl_server_init_minf2g(br_ssl_server_context *cc,
+BR_SSL_EXPORT void br_ssl_server_init_minf2g(br_ssl_server_context *cc,
 	const br_x509_certificate *chain, size_t chain_len,
 	const br_ec_private_key *sk);
 
@@ -3619,7 +3625,7 @@ void br_ssl_server_init_minf2g(br_ssl_server_context *cc,
  * \param chain_len   certificate chain length (number of certificate).
  * \param sk          EC private key.
  */
-void br_ssl_server_init_minu2g(br_ssl_server_context *cc,
+BR_SSL_EXPORT void br_ssl_server_init_minu2g(br_ssl_server_context *cc,
 	const br_x509_certificate *chain, size_t chain_len,
 	const br_ec_private_key *sk);
 
@@ -3639,7 +3645,7 @@ void br_ssl_server_init_minu2g(br_ssl_server_context *cc,
  * \param chain_len   certificate chain length (number of certificate).
  * \param sk          EC private key.
  */
-void br_ssl_server_init_minv2g(br_ssl_server_context *cc,
+BR_SSL_EXPORT void br_ssl_server_init_minv2g(br_ssl_server_context *cc,
 	const br_x509_certificate *chain, size_t chain_len,
 	const br_ec_private_key *sk);
 
@@ -3655,7 +3661,7 @@ void br_ssl_server_init_minv2g(br_ssl_server_context *cc,
  * \param chain_len   certificate chain length (number of certificate).
  * \param sk          RSA private key.
  */
-void br_ssl_server_init_mine2c(br_ssl_server_context *cc,
+BR_SSL_EXPORT void br_ssl_server_init_mine2c(br_ssl_server_context *cc,
 	const br_x509_certificate *chain, size_t chain_len,
 	const br_rsa_private_key *sk);
 
@@ -3671,7 +3677,7 @@ void br_ssl_server_init_mine2c(br_ssl_server_context *cc,
  * \param chain_len   certificate chain length (number of certificate).
  * \param sk          EC private key.
  */
-void br_ssl_server_init_minf2c(br_ssl_server_context *cc,
+BR_SSL_EXPORT void br_ssl_server_init_minf2c(br_ssl_server_context *cc,
 	const br_x509_certificate *chain, size_t chain_len,
 	const br_ec_private_key *sk);
 
@@ -3763,7 +3769,7 @@ br_ssl_server_get_client_curves(const br_ssl_server_context *cc)
  *
  * \param cc   server context to clear.
  */
-void br_ssl_server_zero(br_ssl_server_context *cc);
+BR_SSL_EXPORT void br_ssl_server_zero(br_ssl_server_context *cc);
 
 /**
  * \brief Set an externally provided policy context.
@@ -3800,7 +3806,7 @@ br_ssl_server_set_policy(br_ssl_server_context *cc,
  * \param irsacore         RSA core implementation.
  * \param irsasign         RSA signature implementation (PKCS#1 v1.5).
  */
-void br_ssl_server_set_single_rsa(br_ssl_server_context *cc,
+BR_SSL_EXPORT void br_ssl_server_set_single_rsa(br_ssl_server_context *cc,
 	const br_x509_certificate *chain, size_t chain_len,
 	const br_rsa_private_key *sk, unsigned allowed_usages,
 	br_rsa_private irsacore, br_rsa_pkcs1_sign irsasign);
@@ -3829,7 +3835,7 @@ void br_ssl_server_set_single_rsa(br_ssl_server_context *cc,
  * \param iec                    EC core implementation.
  * \param iecdsa                 ECDSA signature implementation ("asn1" format).
  */
-void br_ssl_server_set_single_ec(br_ssl_server_context *cc,
+BR_SSL_EXPORT void br_ssl_server_set_single_ec(br_ssl_server_context *cc,
 	const br_x509_certificate *chain, size_t chain_len,
 	const br_ec_private_key *sk, unsigned allowed_usages,
 	unsigned cert_issuer_key_type,
@@ -3912,7 +3918,7 @@ br_ssl_server_set_cache(br_ssl_server_context *cc,
  * \param cc   server context.
  * \return  1 on success, 0 on error.
  */
-int br_ssl_server_reset(br_ssl_server_context *cc);
+BR_SSL_EXPORT int br_ssl_server_reset(br_ssl_server_context *cc);
 
 /* ===================================================================== */
 
@@ -4007,7 +4013,7 @@ typedef struct {
  * \param low_write       callback for writing data on the transport.
  * \param write_context   context pointer for `low_write()`.
  */
-void br_sslio_init(br_sslio_context *ctx,
+BR_SSL_EXPORT void br_sslio_init(br_sslio_context *ctx,
 	br_ssl_engine_context *engine,
 	int (*low_read)(void *read_context,
 		unsigned char *data, size_t len),
@@ -4036,7 +4042,7 @@ void br_sslio_init(br_sslio_context *ctx,
  * \param len   maximum number of bytes to obtain.
  * \return  number of bytes obtained, or -1 on error.
  */
-int br_sslio_read(br_sslio_context *cc, void *dst, size_t len);
+BR_SSL_EXPORT int br_sslio_read(br_sslio_context *cc, void *dst, size_t len);
 
 /**
  * \brief Read application data from a SSL connection.
@@ -4051,7 +4057,7 @@ int br_sslio_read(br_sslio_context *cc, void *dst, size_t len);
  * \param len   number of bytes to obtain.
  * \return  0 on success, or -1 on error.
  */
-int br_sslio_read_all(br_sslio_context *cc, void *dst, size_t len);
+BR_SSL_EXPORT int br_sslio_read_all(br_sslio_context *cc, void *dst, size_t len);
 
 /**
  * \brief Write some application data unto a SSL connection.
@@ -4077,7 +4083,7 @@ int br_sslio_read_all(br_sslio_context *cc, void *dst, size_t len);
  * \param len   maximum number of bytes to write.
  * \return  number of bytes written, or -1 on error.
  */
-int br_sslio_write(br_sslio_context *cc, const void *src, size_t len);
+BR_SSL_EXPORT int br_sslio_write(br_sslio_context *cc, const void *src, size_t len);
 
 /**
  * \brief Write application data unto a SSL connection.
@@ -4097,7 +4103,7 @@ int br_sslio_write(br_sslio_context *cc, const void *src, size_t len);
  * \param len   number of bytes to write.
  * \return  0 on success, or -1 on error.
  */
-int br_sslio_write_all(br_sslio_context *cc, const void *src, size_t len);
+BR_SSL_EXPORT int br_sslio_write_all(br_sslio_context *cc, const void *src, size_t len);
 
 /**
  * \brief Flush pending data.
@@ -4116,7 +4122,7 @@ int br_sslio_write_all(br_sslio_context *cc, const void *src, size_t len);
  * \param cc    SSL wrapper context.
  * \return  0 on success, or -1 on error.
  */
-int br_sslio_flush(br_sslio_context *cc);
+BR_SSL_EXPORT int br_sslio_flush(br_sslio_context *cc);
 
 /**
  * \brief Close the SSL connection.
@@ -4134,7 +4140,7 @@ int br_sslio_flush(br_sslio_context *cc);
  * \param cc    SSL wrapper context.
  * \return  0 on success, or -1 on error.
  */
-int br_sslio_close(br_sslio_context *cc);
+BR_SSL_EXPORT int br_sslio_close(br_sslio_context *cc);
 
 /* ===================================================================== */
 
