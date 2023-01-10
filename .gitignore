@@ -6,3 +6,5 @@
 /testx509
 compile_commands.json
 .clangd
+.idea
+.cmake-*
