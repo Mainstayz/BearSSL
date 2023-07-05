@@ -11,6 +11,12 @@ add_library(BearSSL::BearSSL ALIAS bearssl)
 
 add_subdirectory(src)
 
+install(TARGETS bearssl
+        RUNTIME DESTINATION bin
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        )
+
 #add_subdirectory(samples)
 #add_subdirectory(tools)
 #add_subdirectory(test)
